@@ -1,0 +1,27 @@
+#!/bin/bash
+
+TAHOE_DIR=/tahoe
+CLIENT_PORT=$TAHOE_DIR/client.port
+TAHOE_CFG=$TAHOE_DIR/tahoe.cfg
+
+# if the CLIENT_PORT file doesn't exist, we've got a new image we need to configure
+if [ ! -f $CLIENT_PORT ]; then
+
+    if [ $# -lt 3 ]; then
+       echo "Required args:  <nickname> <introducer url>" 
+       exit 1
+    fi
+
+    NICKNAME=$2
+    INTRO_URL=$3
+
+    cat /etc/tahoe.cfg.tmpl | sed "s/TAHOE_NICKNAME/NICKNAME/;s/TAHOE_INTRODUCER_FURL/INTRO_URL/;"  >$TAHOE_CFG
+   
+    # do this here so that it gets created on the bind-mounted TAHOE_DIR 
+    echo 34567 >$CLIENT_PORT
+
+fi
+
+chown -R daemon:daemon $TAHOE_DIR
+su daemon -c "tahoe run $TAHOE_DIR"
+
