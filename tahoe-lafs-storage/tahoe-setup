@@ -8,7 +8,21 @@ TAHOE_CFG=$TAHOE_DIR/tahoe.cfg
 if [ ! -f $CLIENT_PORT ]; then
 
     if [ $# -lt 3 ]; then
-       echo "Required args:  <nickname> <introducer url>" 
+        cat <<EOMSG
+Required args:  <nickname> <introducer url>
+
+But you also need to bind the listening port to your host
+and you probably want to bind-mount a navigable directory onto the /tahoe
+directory in the container, so, if 
+
+    PORT=58273
+    STORAGE=/tahoe-storage/
+
+Then you likely want to run something like:
+
+    docker run -v $STORAGE:/tahoe -p $PORT:34567 -i -t tahoe-storage <nickname> <introducer-url>
+
+EOMSG
        exit 1
     fi
 

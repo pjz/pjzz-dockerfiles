@@ -18,7 +18,6 @@ EXPOSE 34567
 ADD tahoe-setup /usr/local/bin/tahoe-setup
 RUN chmod +x /usr/local/bin/tahoe-setup
 
-USER daemon
 ENTRYPOINT /usr/local/bin/tahoe-setup
 
 
