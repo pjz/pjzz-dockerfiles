@@ -36,12 +36,6 @@ RUN perl -pi -e"s/hostname/localhost.localdomain/" NamecoinToBind/config.php # i
 # expose the dns port
 EXPOSE 53
 
-# install sshd
-RUN apt-get install -y openssh-server vim
-RUN mkdir /var/run/sshd
-RUN echo 'root:root' |chpasswd
-EXPOSE 22
-
 # Add our supervisor config
 ADD namecoindns.conf /etc/supervisor/conf.d/
 CMD supervisord -c /etc/supervisor.conf

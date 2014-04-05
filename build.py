@@ -36,7 +36,7 @@ def namecoindns_run():
     env['NAMECOIN_USERNAME'] = 'root'
     env['NAMECOIN_PASSWORD'] = 'root'
     env['NAMECOIN_HOSTNAME'] = 'localhost.localdomain'
-    shell('docker', 'run', '-d', '-t', '-p', '53053:53', '-p', '53053:53/udp', '-p', '2222:22', 'pjz/namecoin-dns', silent=False, env=env)
+    shell('docker', 'run', '-d', '-t', '-p', '53053:53', '-p', '53053:53/udp', 'pjz/namecoin-dns', silent=False, env=env)
 
 def tahoe_images():
     run('docker', 'build', '-t', 'pjzz/tahoe-lafs-introducer', '.', cwd=_docker_dir('tahoe-lafs-introducer'), silent=False)
