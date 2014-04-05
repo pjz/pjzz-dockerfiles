@@ -2,7 +2,8 @@ FROM pjzz/base
 
 # Install tahoe
 RUN apt-get install -y build-essential python-pip libcrypto++-dev python-dev libssl-dev libffi-dev
-RUN pip install twisted allmydata-tahoe
+# Run as separate installs due to nevow dependency wonkiness
+RUN pip install twisted && pip install allmydata-tahoe
 
 RUN mkdir -p /tahoe
 RUN chown -R daemon:daemon /tahoe
