@@ -8,7 +8,7 @@ RUN echo 'deb http://download.opensuse.org/repositories/home:/p_conrad:/coins/De
 RUN apt-get update # 20140326
 
 # install namecoin, bind, and NamecoinToBind deps
-RUN apt-get install -y bind9 idn php5-cli git namecoin cron ssmtp git ; apt clean
+RUN apt-get install -y bind9 idn php5-cli git namecoin cron ssmtp git ; apt-get clean
 
 # configure namecoin
 WORKDIR /root
