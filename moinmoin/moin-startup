@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ ! -d /srv/wiki/bin ]; then
+    cd /srv/wiki
+    mkdir -p bin htdocs
+    cp -R /usr/share/moin/data /usr/share/moin/underlay .
+    cp /usr/local/bin/moin.fcgi /srv/wiki/bin/moin.fcgi
+    cp /usr/local/bin/wikiconfig.py /srv/wiki/wikiconfig.py
+    chown -R www-data:www-data .
+    chmod -R ug+rwX .
+fi
+
+/usr/sbin/lighttpd -D -f /etc/lighttpd/lighttpd.conf
+
